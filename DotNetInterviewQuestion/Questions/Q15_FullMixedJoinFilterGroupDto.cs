@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
+
+public class Program
+{
+    public static void Main()
+    {
+        var customers = new List<Customer>
+        {
+            new Customer { Id = 1, Name = "Alice", IsActive = true },
+            new Customer { Id = 2, Name = "Bob", IsActive = false },
+            new Customer { Id = 3, Name = "Cathy", IsActive = true }
+        };
+
+        var orders = new List<Order>
+        {
+            new Order { OrderId = 101, CustomerId = 1, Amount = 120.5, CreatedAt = new DateTime(2026, 4, 20) },
+            new Order { OrderId = 102, CustomerId = 1, Amount = 300.0, CreatedAt = new DateTime(2026, 4, 22) },
+            new Order { OrderId = 103, CustomerId = 2, Amount = 80.0, CreatedAt = new DateTime(2026, 4, 21) },
+            new Order { OrderId = 104, CustomerId = 3, Amount = 500.0, CreatedAt = new DateTime(2026, 4, 23) }
+        };
+
+        var result = Solve(customers, orders);
+
+        Console.WriteLine(JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true }));
+    }
+
+    public static List<CustomerOrderSummaryDto> Solve(List<Customer> customers, List<Order> orders)
+    {
+        // Code here
+        throw new NotImplementedException();
+    }
+}
+
+public class Customer
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public bool IsActive { get; set; }
+}
+
+public class Order
+{
+    public int OrderId { get; set; }
+    public int CustomerId { get; set; }
+    public double Amount { get; set; }
+    public DateTime CreatedAt { get; set; }
+}
+
+public class CustomerOrderSummaryDto
+{
+    public string CustomerName { get; set; }
+    public int OrderCount { get; set; }
+    public double TotalAmount { get; set; }
+    public DateTime LatestOrderDate { get; set; }
+}
